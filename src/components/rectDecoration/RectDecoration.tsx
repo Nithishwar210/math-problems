@@ -49,8 +49,9 @@ const RectDecoration = () => {
         <div>
             <h2>Rectangle decorations</h2>
             <label>Choose a Decor:</label>
-            <select onChange={onChangeDecor} style={{ marginBottom: 10 }} name="decors" id="decors">
-                <option onClick={onChangeDecor} value="1">Decor 1</option>
+            <select  onChange={onChangeDecor} style={{ marginBottom: 10 }} name="decors" id="decors">
+                <option disabled selected />
+                <option value="1">Decor 1</option>
                 <option value="2">Decor 2</option>
                 <option value="3">Decor 3</option>
             </select>
