@@ -3,7 +3,7 @@ import { Rectangle, Config, Option } from '../../types/rectDecorations';
 import { Decorator } from '../../repository/decorator';
 
 // Configuration for the decorator
-const config:Config = {
+const config: Config = {
     paddingRange: { min: 0.03, max: 0.08 },
     widthCoverageRange: { min: 0.4, max: 0.8 },
     spacing: { x: 0.1, y: 0 },
@@ -40,7 +40,7 @@ const RectDecoration = () => {
 
     const onChangeDecor = (e: any) => {
         const currentDecor = e.target.value
-        const boundary = decorInstance.addDecors(currentDecor,defaultRect)
+        const boundary = decorInstance.addDecors(currentDecor, defaultRect)
         const temp = [...boundary]
         setRectangles(temp);
     }
@@ -48,13 +48,15 @@ const RectDecoration = () => {
     return (
         <div>
             <h2>Rectangle decorations</h2>
-            <label>Choose a Decor:</label>
-            <select  onChange={onChangeDecor} style={{ marginBottom: 10 }} name="decors" id="decors">
-                <option disabled selected />
-                <option value="1">Decor 1</option>
-                <option value="2">Decor 2</option>
-                <option value="3">Decor 3</option>
-            </select>
+            <div style={{display: 'flex', flexDirection:'column', alignItems: 'center' }}>
+                <label>Choose a Decor:</label>
+                <select onChange={onChangeDecor} style={{ marginBottom: 10, width: '50%', }} name="decors" id="decors">
+                    <option disabled selected />
+                    <option value="1">Decor 1</option>
+                    <option value="2">Decor 2</option>
+                    <option value="3">Decor 3</option>
+                </select>
+            </div>
             <div>
                 <canvas ref={canvasRef} width={500} height={500} style={{ border: '1px solid black' }} />
             </div>
