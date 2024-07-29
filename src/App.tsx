@@ -7,9 +7,9 @@ function App() {
   return (
     <div style={{ width: '100%' }}>
       <div style={{ display:'flex', flexDirection: 'column', gap:30 }}>
-        <div style={{marginBottom: 10}}>
+        {/* <div style={{marginBottom: 10}}>
           <RectDecoration />
-        </div>
+        </div> */}
         <div style={{widows: '100%'}}>
           <DrawBoundaryCanvas/>
         </div>

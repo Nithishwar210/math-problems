@@ -1,46 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Rectangle } from "../../types/rectDecorations"
-import { DrawBoundary } from "../../repository/drawBoundary";
+import { DrawOutline } from "../../repository/drawOutline";
 
 const DrawBoundaryCanvas = () => {
 
   const defaultRect: Rectangle[] = [
-    { x: 0, y: 150, width: 395, height: 150 },
-    { x: 534, y: 0, width: 393, height: 245 },
-    { x: 280, y: 381, width: 185, height: 150 },
-    { x: 597, y: 326, width: 185, height: 277 },
-  ];
+    { x: 55, y: 0, width: 456, height: 92 },
+    { x: 0, y: 114, width: 565, height: 92 },
+    { x: 0, y: 228, width: 565, height: 92 },
+    { x: 70, y: 342, width: 569, height: 92 },
+    { x: 155, y: 456, width: 650, height: 92 },
+  ]
 
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const drawBoundary = new DrawBoundary(defaultRect);
+  const drawBoundary = new DrawOutline(defaultRect);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const points = drawBoundary.draw()
     const canvas = canvasRef.current;
-    const boundaries = drawBoundary.draw();
     const context = canvas?.getContext('2d');
-    if(canvasRef?.current) {
+    if (canvasRef?.current) {
       canvasRef.current.width = 950
-      canvasRef.current.height = 650
+      canvasRef.current.height = 750
       context && context.clearRect(0, 0, canvasRef?.current?.width || 0, canvasRef?.current?.height || 0);
-      drawRectangleBoundary(context, boundaries);
+      drawRectangleBoundary(context, points);
       drawRectangles(context);
     }
-    
   }, [])
+
+  const drawRectangleBoundary = (ctx: any, points: any) => {
+    points.forEach((rect: any) => {
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "pink";
+      ctx.lineTo(rect[0], rect[1]);
+      ctx.stroke();
+    });
+  };
 
   const drawRectangles = (context: any) => {
     defaultRect.forEach((rect: any) => {
       context.fillStyle = rect?.color || '#00BFFF';
       context.fillRect(rect.x, rect.y, rect?.width || 5, rect?.height || 5);
-    });
-  };
-
-  const drawRectangleBoundary = (ctx: any, boundaries: any[]) => {
-    boundaries.forEach((rect: any) => {
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = "pink";
-      ctx.lineTo(rect[0], rect[1]);
-      ctx.stroke();
     });
   };
 

@@ -1,36 +1,40 @@
 import React from "react";
-import { RectangleSplitter } from "../../repository/divideRectangles";
+import { ShapeComposition } from "../../repository/divideRectangles";
 
 export const DivideRectangles = () => {
 
-    const defaultParts = 3;
-    const [parts] = React.useState(defaultParts)
+    const defaultParts = 2;
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
-    const rectangleInput = { x: 0, y: 0, w: 100, h: 100 };
-    const rectanglesSplitter = new RectangleSplitter();
-    const rectanglesSplitted = rectanglesSplitter.splitRectangle(rectangleInput, parts);
 
     React.useEffect(() => {
+       
+    }, [defaultParts])
+
+    const onClick = () => {
+        const rectanglesSplitted = ShapeComposition(0, 0, 100, 100, defaultParts)
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext('2d');
         ctx && ctx.clearRect(0, 0, canvasRef?.current?.width || 0, canvasRef?.current?.height || 0);
-        drawRectangles(ctx, rectanglesSplitted);
-    }, [])
+        console.log({ rectanglesSplitted });
+        ctx && drawNode(ctx, rectanglesSplitted);
+    }
+    const drawNode = (ctx: CanvasRenderingContext2D, nodes: any[]) => {
 
-    const drawRectangles = (context: any, rectangles: (Node | any)[]) => {
-        rectangles.forEach(rect => {
-            if (rect.type === 'leaf') {
-                context.strokeStyle = 'black';
-                context.strokeRect(rect.x, rect.y, rect.w, rect.h);
-            } else if (rect.children) {
-                drawRectangles(context, rect.children);
+        nodes.forEach((node: any) => {
+            if (node?.children?.length > 0) {
+                drawNode(ctx, node.children);
+            } else {
+                node && ctx.strokeRect(node.coordinates[0], node.coordinates[1], node.w, node.h);
             }
-        })
+        }
+        )
+
     };
 
     return (
         <div>
             <h2>Rectangles splitted</h2>
+            <button onClick={onClick}>click me</button>
             <canvas ref={canvasRef} width={500} height={500} style={{ border: '1px solid black' }} />
         </div>
     )
