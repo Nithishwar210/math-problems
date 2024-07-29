@@ -48,39 +48,35 @@ export function ShapeComposition(x: number, y: number, w: number, h: number, n: 
   if (n === 1) {
     return [new LeafNode(x, y, w, h)];
   }
-  
-  function recursive(x: number, y: number, width: number, height: number, parts: number): any {
-    
+
+  function recursive(x: number, y: number, width: number, height: number, parts: number, size: number = 0): any {
+
     if (parts === 1) {
-      const leaf = new LeafNode(x, y, width, height);
+      const leaf = new LeafNode(x + size, y, width, height);
       return leaf
     }
-    
-    for (let i = 1; i < parts; i++) {
 
-      let remainingParts = parts - i;
+    for (let i = 1; i < parts; i++) {
+      const remainingParts = parts - i;
       if (remainingParts < 1) continue;
 
-      const node = new Node(x, y, width, height, "container");
+      const rowHeight = height / parts * i
+      const remainingHeight = height - rowHeight;
+      const node = new Node(x + size, y, width, height, 'container');
+
+      if (width >= height) {
+        const child1 = recursive(x, y, width, rowHeight, i, node.coordinates[0])
+        node.addChild(child1)
+        node.addChild(recursive(x + node.coordinates[0], y + rowHeight, width, remainingHeight, remainingParts, node.coordinates[0]))
+      }
+
+      if (width <= height) {
+        const colWidth = width / parts * i;
+        const remainingColWidth = width - colWidth
+        node.addChild(recursive(x + node.coordinates[0], y, colWidth, height, i, node.coordinates[0]));
+        node.addChild(recursive(x + node.coordinates[0] + colWidth, y, remainingColWidth, height, remainingParts, node.coordinates[0]));
+      }
       
-      // Horizontal split
-      const splitRatio = Math.random();
-      const splitHeight = height * splitRatio
-      const remainingHeight = height - splitHeight;
-      const horizontalNode = new Node(x, y, width, height, "container");
-      horizontalNode.addChild(recursive(x, y, width, splitHeight, i));
-      horizontalNode.addChild(recursive(x, y + splitHeight, width, remainingHeight, remainingParts));
-      node.addChild(horizontalNode);
-
-      // Vertical split
-      const splitWidth = width * splitRatio;
-      const remainingWidth = width - splitWidth;
-      const verticalNode = new Node(x, y, width, height, "container");
-      verticalNode.addChild(recursive(x, y, splitWidth, height, i));
-      verticalNode.addChild(recursive(x + splitWidth, y, remainingWidth, height, remainingParts));
-      node.addChild(verticalNode);
-
-      // Adding both current container node in result
       result.push(node)
     }
 

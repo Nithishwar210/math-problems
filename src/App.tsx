@@ -1,7 +1,6 @@
 import './App.css'
 import { DivideRectangles } from './components/divideRectangles/DivideRectangles'
 import DrawBoundaryCanvas from './components/drawBoundary/DrawBoundary'
-import RectDecoration from './components/rectDecoration/RectDecoration'
 
 function App() {
   return (
