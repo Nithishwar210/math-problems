@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Rectangle } from "../../types/rectDecorations"
-import { DrawBoundary } from "../../repository/drawBoundary";
+import { DrawBoundaryFactory } from "../../repository/drawBoundary";
 
 const DrawBoundaryCanvas = () => {
 
@@ -12,7 +12,7 @@ const DrawBoundaryCanvas = () => {
     ]
 
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const drawBoundary = new DrawBoundary(defaultRect);
+  const drawBoundary = new DrawBoundaryFactory(defaultRect);
 
   useEffect(() => {
     const points = drawBoundary.draw()

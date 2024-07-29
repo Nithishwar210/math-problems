@@ -1,6 +1,6 @@
 import { Config, Rectangle,Option } from "../types/rectDecorations";
 
-export class Decorator {
+export class DecoratorFactory {
 
     config: Config;
 

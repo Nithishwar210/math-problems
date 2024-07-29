@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Rectangle, Config, Option } from '../../types/rectDecorations';
-import { Decorator } from '../../repository/decorator';
+import { DecoratorFactory } from '../../repository/decorator';
 
 // Configuration for the decorator
 const config: Config = {
@@ -21,7 +21,7 @@ const RectDecoration = () => {
 
     const [rectangles, setRectangles] = useState<Rectangle[]>(defaultRect);
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
-    const decorInstance = new Decorator(config);
+    const decorInstance = new DecoratorFactory(config);
 
     useEffect(() => {
         const canvas = canvasRef.current;
