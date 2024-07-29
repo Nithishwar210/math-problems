@@ -42,7 +42,6 @@ export class DrawOutline {
         function isNotRightTurn(a: any, b: any, c: any) {
 
             const crossProduct = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
-            console.log({ a, b, c, crossProduct });
             return crossProduct <= 0;
         }
 

@@ -7,10 +7,10 @@ const DrawBoundaryCanvas = () => {
   const defaultRect: Rectangle[] = [
     { x: 55, y: 0, width: 456, height: 92 },
     { x: 0, y: 114, width: 565, height: 92 },
-    { x: 0, y: 228, width: 565, height: 92 },
-    { x: 70, y: 342, width: 569, height: 92 },
-    { x: 155, y: 456, width: 650, height: 92 },
-  ]
+    // { x: 0, y: 228, width: 565, height: 92 },
+    // { x: 70, y: 342, width: 569, height: 92 },
+    // { x: 155, y: 456, width: 650, height: 92 },
+    ]
 
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const drawBoundary = new DrawOutline(defaultRect);
