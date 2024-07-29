@@ -15,9 +15,9 @@ const RectDecoration = () => {
 
     const defaultRect = [
         { x: 100, y: 100, width: 200, height: 40 },
-        { x: 50, y: 160, width: 100, height: 40 },
-        { x: 180, y: 220, width: 40, height: 40 },
-    ];
+        { x: 100, y: 160, width: 180, height: 40 },
+        { x: 100, y: 220, width: 100, height: 40 },
+      ]
 
     const [rectangles, setRectangles] = useState<Rectangle[]>(defaultRect);
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
