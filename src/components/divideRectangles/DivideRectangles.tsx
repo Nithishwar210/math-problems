@@ -3,7 +3,7 @@ import { ShapeComposition } from "../../repository/divideRectangles";
 
 export const DivideRectangles = () => {
 
-    const defaultParts = 3
+    const defaultParts = 2
     const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
     React.useEffect(() => {
@@ -18,7 +18,6 @@ export const DivideRectangles = () => {
         ctx && drawNode(ctx, rectanglesSplitted);
     }
     const drawNode = (ctx: CanvasRenderingContext2D, nodes: any[]) => {
-
         nodes.forEach((node: any) => {
             if (node?.children?.length > 0) {
                 drawNode(ctx, node.children);

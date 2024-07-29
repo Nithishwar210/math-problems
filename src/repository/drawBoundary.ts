@@ -5,13 +5,13 @@ interface Rectangle {
     height: number
 }
 
-export class DrawOutline {
+export class DrawBoundary {
     constructor(public rectangles: Rectangle[]) { }
 
     draw() {
         const points = this.getPoints();
-        points.sort((a, b) => a[0] - b[0]);
-
+        points.sort((a, b) => a[0] !== b[0] ? a[0] - b[0] : a[1] - b[1]);
+        
         const upper: any = [];
         const lower: any = [];
 
@@ -35,9 +35,10 @@ export class DrawOutline {
         lower.pop();
 
         const outline = [...upper, ...lower];
-
         const detailedOutline = this.addMidPoints(outline);
+
         return detailedOutline
+
 
         function isNotRightTurn(a: any, b: any, c: any) {
 

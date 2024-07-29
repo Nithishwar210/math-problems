@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import { Rectangle } from "../../types/rectDecorations"
-import { DrawOutline } from "../../repository/drawOutline";
+import { DrawBoundary } from "../../repository/drawBoundary";
 
 const DrawBoundaryCanvas = () => {
 
   const defaultRect: Rectangle[] = [
-    { x: 55, y: 0, width: 456, height: 92 },
-    { x: 0, y: 114, width: 565, height: 92 },
-    // { x: 0, y: 228, width: 565, height: 92 },
-    // { x: 70, y: 342, width: 569, height: 92 },
-    // { x: 155, y: 456, width: 650, height: 92 },
+    { x: 0, y: 150, width: 395, height: 150 },
+    { x: 534, y: 0, width: 393, height: 245 },
+    { x: 280, y: 381, width: 185, height: 150 },
+    { x: 597, y: 326, width: 185, height: 277 },
     ]
 
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  const drawBoundary = new DrawOutline(defaultRect);
+  const drawBoundary = new DrawBoundary(defaultRect);
 
   useEffect(() => {
     const points = drawBoundary.draw()
